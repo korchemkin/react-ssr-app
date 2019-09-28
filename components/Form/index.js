@@ -33,7 +33,7 @@ const Form = () => {
                 width: 300px;
                 margin: 25px 0 0 25px;
                 border-radius: 4px;
-                z-index: 999;
+                z-index: 9999;
                 padding: 30px;
                 box-sizing: border-box;
                 font-size: 16px;
