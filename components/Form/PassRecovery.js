@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { useTranslation } from "react-i18next";
 
-const PassRecovery = () => {
-    const useRuter = useRouter();
+const PassRecovery = (props) => {
     const { t } = useTranslation();
 
     useEffect(() => {
         const title = document.title;
-        document.title = ('pass_recovery');
+        document.title = t('pass_recovery');
         return () => document.title = title;
     });   
 
@@ -18,7 +16,7 @@ const PassRecovery = () => {
             <input type="text" 
                 placeholder={ t('email') } 
                 className="form__input" 
-                defaultValue={ useRuter.query.email } 
+                defaultValue={ props.email } 
             />
             <button className="form__btn">{ t('restore') }</button>
         </div>

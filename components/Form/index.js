@@ -7,14 +7,16 @@ import { useRouter } from 'next/router';
 const Form = () => {
     const router = useRouter();
     const [recovery, setRecovery] = useState(false);
+    const [email, setEmail] = useState();
     const { t } = useTranslation();
 
     const toggleRecovery = (ev) => {
         ev.preventDefault();
         setRecovery(!recovery);
     };
+    const onEmailChange = (ev) => setEmail(ev.target.value);
 
-    const content = recovery ? <PassRecovery /> : <SignIn />;
+    const content = recovery ? <PassRecovery email={ email } /> : <SignIn onEmailChange={ onEmailChange }/>;
     const recoveryBtn = (
         recovery ? 
         (<a href="#" className="form__link" onClick={toggleRecovery}>{ t('cancel') }</a>) : 

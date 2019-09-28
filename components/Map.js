@@ -26,21 +26,27 @@ const Map = (props) => {
   };
 
   useEffect(() => {
-    if (Router.query 
-      && (Router.query.lat 
+    if (Router.query.lat 
       || Router.query.long 
-      || Router.query.zoom)
+      || Router.query.zoom
     ) {
       return;
     }
 
+    const map = mapRef.current;
+    if (map == null) {
+      return;
+    }
+
+    // some transiion
+    const center = map.leafletElement.getCenter();
+    map.leafletElement.setView(
+      [center.lat, center.lng], 
+      map.leafletElement.getZoom() + 2
+    );
+
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const map = mapRef.current;
-        if (map == null) {
-          return;
-        }
-
         map.leafletElement.setView(
           [coords.latitude, coords.longitude], 
           map.leafletElement.getZoom()
